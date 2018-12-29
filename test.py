@@ -10,7 +10,7 @@ from selenium.common import exceptions
 # chromedriver 위치
 wd = 'C:/Users/HolaJun/Desktop/DaumNewsCrawling/chromedriver.exe'
 # 크롤링하고자 하는 사이트
-addr = 'https://sports.v.daum.net/v/20181229072357347'
+addr = 'https://entertain.v.daum.net/v/20181229174338972'
 # 출력 파일명
 OUTPUT_FILE_NAME = 'output.txt'
 
@@ -23,13 +23,17 @@ driver.get(addr)
 def daumNewsFullpage():
     cnt = 0
     try:
-        while cnt < 10:
-            driver.find_element_by_css_selector(
-                "#alex-area > div > div > div > div.cmt_box > div.alex_more > a"
-                ).click()
-            time.sleep(0.8)
-            cnt += 1
-            
+        # while cnt < 10:
+        #     driver.find_element_by_css_selector(
+        #         "#alex-area > div > div > div > div.cmt_box > div.alex_more > a"
+        #         ).click()
+        #     time.sleep(0.5)
+        # cnt = 0
+        allfreetoContact = driver.find_elements_by_css_selector('[class*=reply_count]')
+        allfreetoContact.click()
+        for elem in allfreetoContact:
+            elem.click()
+                               
     # 페이지 끝
     except exceptions.ElementNotVisibleException as e:
         pass
@@ -65,7 +69,7 @@ def commentParsing():
             if(nickname[i]):
                 nickname = nickname.replace(nickname[i], '*', 1)
 
-        print('닉네임:', nickname)
+        print('작성자:', nickname)
         print('추천', up, '비추천', down)
         print(result.text , '\n\n')
         cnt += 1;
@@ -83,4 +87,4 @@ if __name__ == "__main__":
     result = commentParsing()
     
     fileSave(result)
-    driver.quit()
+    # driver.quit()
