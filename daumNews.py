@@ -10,7 +10,7 @@ from selenium.common import exceptions
 # chromedriver 위치
 wd = 'C:/Users/HolaJun/Desktop/DaumNewsCrawling/chromedriver.exe'
 # 크롤링하고자 하는 사이트
-addr = 'https://sports.v.daum.net/v/20190101143402372?d=y'
+addr = 'https://sports.v.daum.net/v/20190102211709263?d=y'
 # 출력 파일명
 OUTPUT_FILE_NAME = 'output.txt'
 
@@ -19,12 +19,12 @@ driver = webdriver.Chrome(wd)
 # 매개변수의 주소 띄움
 driver.get(addr)
 
-# 크롤링에 필요 없는 특정 element의 속성 제거하기
-element = driver.find_element_by_class_name('vod_cluster2')
-driver.execute_script("""
-var element = arguments[0];
-element.parentNode.removeChild(element);
-""", element)
+# 크롤링에 필요 없는 특정 element의 속성 제거하기(스포츠란)
+# element = driver.find_element_by_class_name('vod_cluster2')
+# driver.execute_script("""
+# var element = arguments[0];
+# element.parentNode.removeChild(element);
+# """, element)
 
 # 다음뉴스의 모든 댓글 페이지를 띄움
 def daumNewsFullpage():
